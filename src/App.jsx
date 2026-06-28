@@ -83,6 +83,10 @@ function Step1({ onYes }) {
     "Really??",
     "Last chance...",
     "Please? 🥺",
+    "pretty please?",
+    "one more chance",
+    "don’t say no yet",
+    "give it a thought",
     "take time, think again",
   ];
   const noLabel = noLabels[Math.min(noClicks, noLabels.length - 1)];
@@ -123,7 +127,8 @@ function Step1({ onYes }) {
           justifyContent: "center",
           gap: "16px",
           alignItems: "center",
-          height: "60px",
+          minHeight: "72px",
+          flexWrap: "wrap",
         }}
       >
         <button
@@ -143,16 +148,53 @@ function Step1({ onYes }) {
           style={{
             ...btnStyle("transparent", "#2d1f2f"),
             border: "1.5px solid #c0a0a8",
-            position: "absolute",
+            position: "relative",
             transform: `translate(${noPos.x}px, ${noPos.y}px)`,
             transition: "transform 0.2s cubic-bezier(.34,1.56,.64,1)",
-            left: "calc(50% + 16px)",
             zIndex: 10,
+            whiteSpace: "nowrap",
+            minWidth: "fit-content",
           }}
         >
           {noLabel}
         </button>
       </div>
+      {noClicks > 0 && (
+        <div
+          style={{
+            marginTop: "16px",
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "center",
+            gap: "8px",
+          }}
+        >
+          {noLabels.slice(1).map((label, index) => {
+            const isActive =
+              index === Math.min(noClicks - 1, noLabels.length - 2);
+            return (
+              <span
+                key={label}
+                style={{
+                  padding: "8px 12px",
+                  borderRadius: "999px",
+                  border: isActive
+                    ? "1.5px solid #2d1f2f"
+                    : "1px solid #d9c0c8",
+                  background: isActive
+                    ? "rgba(45,31,47,0.08)"
+                    : "rgba(255,255,255,0.8)",
+                  color: "#2d1f2f",
+                  fontSize: "12px",
+                  fontWeight: isActive ? 600 : 500,
+                }}
+              >
+                {label}
+              </span>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
