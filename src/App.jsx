@@ -666,31 +666,31 @@ export default function DateProposalApp() {
         }
         @media (max-width: 480px) {
           .app-shell {
-            padding: 4px;
+            padding: 14px;
           }
           .proposal-card {
-            width: calc(100vw - 8px) !important;
-            max-width: calc(100vw - 8px) !important;
-            padding: 8px !important;
+            width: clamp(240px, 72vw, 260px) !important;
+            max-width: 260px !important;
+            padding: 6px !important;
             border-radius: 20px;
           }
           .food-grid {
-            gap: 6px !important;
-            margin-top: 12px !important;
+            gap: 4px !important;
+            margin-top: 10px !important;
           }
           .food-item {
-            padding: 10px 4px !important;
+            padding: 8px 4px !important;
           }
           .food-label {
             font-size: 10px !important;
           }
           .food-help {
-            margin-top: 8px !important;
-            font-size: 11px !important;
+            margin-top: 6px !important;
+            font-size: 10px !important;
           }
           .food-button {
-            margin-top: 10px !important;
-            padding: 11px 22px !important;
+            margin-top: 8px !important;
+            padding: 10px 20px !important;
           }
         }
       `}</style>
