@@ -1,7 +1,7 @@
 import confetti from "canvas-confetti";
 import "./App.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const [hovered, setHovered] = [null, () => {}];
 const celebrate = () => {
   confetti({
@@ -68,6 +68,31 @@ function FloatingHearts() {
 function Step1({ onYes }) {
   const [noPos, setNoPos] = useState({ x: 0, y: 0 });
   const [noClicks, setNoClicks] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 480px)");
+
+    const updateMobileState = () => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    updateMobileState();
+
+    if (mediaQuery.addEventListener) {
+      mediaQuery.addEventListener("change", updateMobileState);
+    } else {
+      mediaQuery.addListener(updateMobileState);
+    }
+
+    return () => {
+      if (mediaQuery.removeEventListener) {
+        mediaQuery.removeEventListener("change", updateMobileState);
+      } else {
+        mediaQuery.removeListener(updateMobileState);
+      }
+    };
+  }, []);
 
   const moveNo = () => {
     const x = (Math.random() - 0.5) * 300;
@@ -159,7 +184,7 @@ function Step1({ onYes }) {
           {noLabel}
         </button>
       </div>
-      {noClicks > 0 && (
+      {noClicks > 0 && !isMobile && (
         <div
           style={{
             marginTop: "16px",
