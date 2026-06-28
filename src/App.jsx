@@ -95,8 +95,10 @@ function Step1({ onYes }) {
   }, []);
 
   const moveNo = () => {
-    const x = (Math.random() - 0.5) * 300;
-    const y = (Math.random() - 0.5) * 200;
+    const xRange = isMobile ? 36 : 300;
+    const yRange = isMobile ? 18 : 200;
+    const x = (Math.random() - 0.5) * xRange;
+    const y = (Math.random() - 0.5) * yRange;
     setNoPos({ x, y });
     setNoClicks((c) => c + 1);
   };
@@ -179,6 +181,7 @@ function Step1({ onYes }) {
             zIndex: 10,
             whiteSpace: "nowrap",
             minWidth: "fit-content",
+            maxWidth: isMobile ? "100%" : "none",
           }}
         >
           {noLabel}
